@@ -1,5 +1,5 @@
 ## script.rpy — Struk Terakhir Pukul 02.14
-## Ren'Py 8.5.3 — Prolog + Chapter 1 playable, Chapter 2–5 stub.
+## Ren'Py 8.5.3 — Prolog + Chapter 1 + Chapter 2 playable, Chapter 3–5 stub.
 ## Dialog inti diambil dari outline-naskah.md (revisi audit 2026-11-11).
 
 # --- Placeholder aset (ganti dengan file di game/images/ saat siap) ---
@@ -25,6 +25,7 @@ image ujang serius = Text("MANG UJANG — serius", size=40, color="#ffffff")
 image ujang ragu = Text("MANG UJANG — ragu", size=40, color="#ffffff")
 image ratna tegas = Text("BU RATNA — tegas", size=40, color="#ffffff")
 image dimas antusias = Text("DIMAS — antusias", size=40, color="#ffffff")
+image dimas serius = Text("DIMAS — serius", size=40, color="#ffffff")
 
 # --- Awal game ---
 label start:
@@ -144,36 +145,180 @@ label chapter1:
             jump chapter2
 
 # ============================================================
-# CHAPTER 2 — Selasa: Pelanggan Pukul 21.14 (STUB)
-# Naskah penuh: tulis di label ini, mengikuti outline Ch.2.
-# Beat yang harus ada:
-#   2.1 Gudang 15.30 — buku 1998 (bukti_buku_1998 = True jika masuk gudang)
-#   2.2 Pilihan 3 di 21.14 — A: tanya_pak_wirya = True
-#       B: ikuti pulang (Keberanian +2), C: diam (Ketelitian +1)
-#   2.3 Setelah tutup 22.30, warung kopi
+# CHAPTER 2 — Selasa: Pelanggan Pukul 21.14
+# Durasi target: ~12 menit
+# Beat: 2.1 Gudang 15.30 — buku 1998
+#       2.2 Menunggu 21.14 — Pilihan 3
+#       2.3 Setelah tutup 22.30, warung kopi
 # ============================================================
 label chapter2:
-    scene bg gudang
-    show ujang serius at center
-    "[Chapter 2 — STUB: naskah penuh belum ditulis. Beat: gudang 15.30, buku 1998, pilihan 21.14.]"
-    "Placeholder logika: pemain yang masuk gudang mendapat bukti buku 1998."
-    $ bukti_buku_1998 = True
+    scene bg hitam
+    "CHAPTER 2 — Selasa: Pelanggan Pukul 21.14"
 
+    # --- Scene 2.1 — Gudang, 15.30, saat toko sepi ---
+    scene bg interior_siang
+    show alya lelah at center
+    "Selasa, 14.00. Shift sore lagi."
+    "Semalam Alya hampir tidak tidur. Struk 1998 itu masih di saku seragamnya — atau di tangan Bu Ratna, tergantung apa yang dia lakukan kemarin."
+    "Satu hal yang tidak berubah: stok lilin masih kurang satu. Bu Ratna belum menanyakan lagi, tapi Alya tahu pertanyaan itu akan datang."
+
+    if percaya_ujang:
+        show ujang serius at center
+        ujang "Neng Lya. Toko lagi sepi. Ikut saya ke gudang sebentar."
+        alya "Ke gudang, Mang? Ada apa?"
+        ujang "Ada yang harus Neng lihat. Soal struk itu."
+        "Mang Ujang tidak menunggu jawaban. Dia berjalan ke belakang, dan Alya mengikutinya."
+    elif percaya_dimas:
+        show dimas serius at center
+        dimas "Mbak, aku belum dapat apa-apa. Perpustakaan daerah itu bukanya siang, aku baru bisa ke sana besok. Sabar ya."
+        alya "Jadi aku harus nunggu sampai kapan?"
+        dimas "Sampai aku dapat kabar. Atau... Mbak coba tanya Mang Ujang. Dia kan sudah lama di sini. Lebih lama dari toko ini."
+        "Alya menatap pintu gudang di ujung lorong. Dimas benar. Orang yang paling lama di sini bukan Dimas — Mang Ujang."
+        show ujang serius at center
+        ujang "Neng mau ke gudang? Saya bukakan. Tapi jangan lama-lama. Bu Ratna bisa nanya."
+    else:
+        "Alya tidak mengirim foto ke siapa-siapa semalam, dan tidak bertanya ke siapa-siapa pagi ini."
+        "Tapi masalah lilin itu tetap ada. Dan struk itu tetap ada."
+        "Jam 15.30, saat toko sepi, Alya berjalan sendiri ke pintu gudang."
+        show ujang serius at center
+        ujang "Neng ngapain di sini?"
+        alya "Mang... saya mau lihat gudang. Sebentar saja."
+        ujang "Hmm. Ya sudah. Saya temani. Jangan sentuh apa-apa tanpa bilang dulu."
+
+    scene bg gudang
+    show alya curiga at center
+    "Gudang belakang. Gelap, berdebu, bau kardus basah."
+    "Di sudut, di bawah kain, ada bentuk kotak yang Alya kenali samar-samar: mesin kasir tua. Dia belum tahu apa itu — untuk sekarang, dia hanya mencatatnya dalam hati."
+    "Mang Ujang menarik sebuah buku catatan dari rak paling bawah. Sampulnya sudah mengelupas, pinggirnya menguning."
+    "Tulisan tangan di halaman depannya — Alya membandingkannya dengan struk di sakunya. Sama. Persis sama."
+
+    show ujang serius at center
+    ujang "Ini buku almarhumah Bu Lastri. Orang sini memanggilnya Bu Wirya. Dia yang nulis semua pesanan. Roti, susu, lilin. Selalu itu."
+
+    menu:
+        "Buka buku itu dan baca halaman pertamanya.":
+            $ bukti_buku_1998 = True
+            $ ketelitian += 1
+            "Alya membuka halaman pertama. Di sana tertulis, dengan tulisan yang sama seperti di struk:"
+            "\"Lastri — dipanggil Bu Wirya, mengikuti nama suami saya, Wirya Santoso.\""
+            alya "Bu Lastri... istri Pak Wirya?"
+            ujang "Iya. Meninggal tahun sembilan delapan. Pas warung ini mau digusur."
+            jump ch2_buku_dibaca
+
+        "Jangan sentuh dulu. Tanya Mang Ujang siapa Bu Lastri.":
+            $ kepercayaan += 1
+            alya "Mang, buku ini punya siapa? Kenapa masih di sini?"
+            ujang "Punya Bu Lastri. Istri Pak Wirya. Meninggal tahun sembilan delapan, pas warung ini mau digusur."
+            ujang "Halaman pertamanya ada namanya. Baca sendiri, Neng. Saya tidak mau membacakan barang orang mati."
+            "Alya membuka halaman pertama. Tertulis: \"Lastri — dipanggil Bu Wirya, mengikuti nama suami saya, Wirya Santoso.\""
+            $ bukti_buku_1998 = True
+            $ ketelitian += 1
+            jump ch2_buku_dibaca
+
+        "Biarkan saja. Jangan sentuh barang orang yang sudah meninggal.":
+            "Alya menarik tangannya. Mang Ujang menutup kembali buku itu dan meletakkannya di rak."
+            "Bukti itu masih ada di gudang — tapi Alya belum memegangnya. Dia masih bisa kembali di Chapter 4, dengan risiko ketahuan Bu Ratna."
+            jump ch2_tanpa_buku
+
+label ch2_buku_dibaca:
+    show alya curiga at center
+    alya "Mang, dulu Mang kerja apa di warung ini?"
+    ujang "Kuli, Neng. Angkut-angkut. Pas jadi minimarket, saya diangkat jadi satpam."
+    "Mang Ujang menatap buku itu lama, seperti menatap orang."
+    ujang "Jangan dicari, Neng. Ada pesanan yang memang bukan buat orang hidup."
+    alya "Tapi Mang, lilin saya kurang satu. Kalau saya tidak bisa menjelaskan, saya yang dicurigai."
+    "Mang Ujang tidak menjawab. Dia hanya mengembalikan buku itu ke rak, pelan-pelan, seperti meletakkan sesuatu yang mudah pecah."
+    jump ch2_sore
+
+label ch2_tanpa_buku:
+    show ujang ragu at center
+    ujang "Pintar, Neng. Ada barang yang memang bukan buat dipegang sembarangan."
+    "Tapi di wajah Mang Ujang, Alya melihat sesuatu yang lain: lega — dan takut, bersamaan."
+    jump ch2_sore
+
+label ch2_sore:
+    # --- Scene 2.2 — Menunggu 21.14 ---
+    scene bg meja_kasir
+    show alya lelah at center
+    "20.45. Toko mulai sepi. Alya gelisah sepanjang shift."
+    "Setiap kali bel pintu berbunyi, dia menoleh. Bukan. Bukan dia."
+    "Jam di dinding kasir bergerak pelan sekali. 20.52. 21.00. 21.07."
+    "Alya menghitung dalam hati, tanpa sadar: empat puluh enam menit sebelum tutup. Selalu empat puluh enam menit."
+    "21.14."
+    "Bel pintu berbunyi."
+
+    show wirya datar at center
+    "Pak Wirya masuk, seperti biasa. Roti, susu, lilin."
+    "Alya menatap tangannya yang keriput saat dia meletakkan uang pas di meja. Tangan yang sama, yang dulu membawakan roti, susu, dan lilin untuk seseorang yang menunggu jam dua pagi."
+
+    # Pilihan 3 (Chapter 2)
     menu:
         "Tanya langsung: \"Pak, Bapak kenal Bu Lastri?\"":
             $ tanya_pak_wirya = True
+            $ keberanian += 1
+            alya "Pak... Bapak kenal Bu Lastri?"
+            "Pak Wirya terdiam lama. Tangannya berhenti di atas uang kembalian."
+            "Lalu, pelan sekali, dia menjawab."
+            show wirya sedih at center
             wirya "Dia istri saya."
-            jump chapter3
+            "Hanya itu. Tidak ada penjelasan. Tidak ada cerita lanjutan."
+            "Tapi bagi Alya, tiga kata itu sudah cukup untuk mengubah segalanya: Pak Wirya bukan orang asing yang kebetulan datang jam segini. Dia datang untuk seseorang."
+            jump ch2_malam
 
         "Ikuti dia pulang setelah toko tutup (22.15, di luar toko).":
             $ keberanian += 2
-            "Alya melihat Pak Wirya berjalan kaki ke arah rumah keponakannya di Antapani, bukan naik angkot. Dia berhenti sebentar di petak tanah kosong di belakang toko, menunduk sebentar, lalu lanjut jalan."
-            jump chapter3
+            "Alya melayani seperti biasa. Senyum kerja. Terima kasih, Pak. Hati-hati di jalan."
+            "Tapi begitu rolling door diturunkan, dia tidak langsung pulang."
+            scene bg jalan_malam
+            show alya curiga at center
+            "22.15. Di luar toko, hujan rintik. Alya menjaga jarak, mengikuti dari jauh."
+            "Pak Wirya tidak naik angkot. Dia tidak menunggu di halte. Dia berjalan kaki — pelan, tapi pasti — ke arah rumah-rumah di Antapani."
+            "Di tengah jalan, dia berhenti. Di petak tanah kosong di belakang toko, di antara gudang dan tembok pembatas. Dia menunduk sebentar, seperti memberi salam kepada seseorang yang tidak terlihat. Lalu lanjut jalan."
+            "Alya berdiri di bawah hujan, tidak berani mendekat. Pulang ke kos, bajunya basah, dan dia tahu: besok Bu Ratna bisa saja bertanya kenapa dia pulang telat."
+            jump ch2_malam
 
         "Diam saja, layani seperti biasa.":
             $ ketelitian += 1
-            "Alya memperhatikan: Pak Wirya selalu menatap rak lilin paling bawah, tempat dulu ada foto."
-            jump chapter3
+            "Alya melayani seperti biasa. Roti, susu, lilin. Rp23.500. Terima kasih, Pak."
+            "Tapi kali ini dia memperhatikan — benar-benar memperhatikan."
+            "Sebelum keluar, Pak Wirya selalu menatap rak lilin paling bawah. Sekilas saja. Tempat dulu ada foto."
+            "Foto siapa? Alya tidak tahu. Tapi dia mencatatnya."
+            jump ch2_malam
+
+label ch2_malam:
+    # --- Scene 2.3 — Setelah tutup, 22.30, warung kopi ---
+    scene bg jalan_malam
+    show alya lelah at center
+    "22.30. Warung kopi di depan toko. Lampu kuning, bau kopi dan gorengan."
+    "Alya duduk, memesan teh hangat. Dia butuh seseorang untuk bicara — atau setidaknya, seseorang yang mau mendengar."
+
+    if percaya_dimas:
+        show dimas serius at center
+        dimas "Mbak, aku sudah tanya-tanya. Besok aku coba ke perpustakaan daerah, cari arsip koran 1998. Tapi aku tidak janji bisa dapat hari itu juga. Arsip koran itu... ya, Mbak tahu sendiri. Lama."
+        alya "Jadi besok pun belum tentu ada jawaban?"
+        dimas "Belum tentu. Tapi Mbak, ini penting: kalau memang ada koran 1998 soal warung itu, kita jadi tahu warungnya tutup kenapa. Bukan cuma soal struk."
+        "Dimas menyeruput kopinya, lalu menatap Alya serius."
+        dimas "Mbak, satu hal. Kalau Mang Ujang bilang yang datang itu bukan orang hidup... jangan langsung percaya. Cari buktinya dulu."
+    elif percaya_ujang:
+        show ujang ragu at center
+        ujang "Neng, saya sudah bilang. Jangan dicari."
+        alya "Tapi Mang, saya sudah baca bukunya. Bu Lastri itu istri Pak Wirya, kan?"
+        "Mang Ujang menghindari kontak mata. Dia menatap gelas kopinya lama."
+        ujang "Neng... ada hal yang lebih baik tidak ditanya. Saya cuma tidak mau toko ini dibilang angker. Saya cuma mau kerja tenang sampai tua."
+        "Itu bukan jawaban. Tapi Alya mencatat nada suaranya: bukan takut pada hantu. Takut pada sesuatu yang lain."
+    else:
+        show dimas antusias at center
+        dimas "Mbak Alya! Kok di sini? Aku kira Mbak langsung pulang."
+        alya "Aku... butuh udara. Kamu ngapain di sini jam segini?"
+        dimas "Nongkrong. Biasa. Eh, Mbak, soal struk itu — aku besok coba ke perpustakaan daerah. Cari arsip koran 1998. Tidak janji dapat, tapi dicoba dulu."
+        "Alya mengangguk. Dia tidak bercerita soal buku di gudang. Belum. Dia masih memilih siapa yang bisa dia percaya."
+
+    "Malam itu, di kos, Alya menulis di buku catatannya sendiri — tiga hal yang dia tahu pasti:"
+    "Satu: struk itu nyata, tanggal 1998, jam 02.14."
+    "Dua: Bu Lastri itu istri Pak Wirya, dan pesanannya selalu roti, susu, lilin."
+    "Tiga: Pak Wirya datang jam 21.14, dan dia tidak pernah naik angkot."
+    "Besok, Rabu, dia harus memilih: percaya pada siapa?"
+    jump chapter3
 
 # ============================================================
 # CHAPTER 3 — Rabu: Dua Versi Cerita (STUB)
