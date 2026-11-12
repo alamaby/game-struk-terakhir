@@ -1,0 +1,19 @@
+# Ren'Py
+game/cache/
+game/saves/
+game/*.rpyc
+game/*.rpyb
+*.rpyc
+*.rpyb
+
+# Build output
+*.zip
+*.tar.bz2
+*-dists/
+dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
