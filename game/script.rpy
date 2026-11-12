@@ -1,5 +1,5 @@
 ## script.rpy — Struk Terakhir Pukul 02.14
-## Ren'Py 8.5.3 — Prolog + Chapter 1 + Chapter 2 playable, Chapter 3–5 stub.
+## Ren'Py 8.5.3 — Prolog + Chapter 1 + Chapter 2 + Chapter 3 playable, Chapter 4–5 stub.
 ## Dialog inti diambil dari outline-naskah.md (revisi audit 2026-11-11).
 
 # --- Placeholder aset (ganti dengan file di game/images/ saat siap) ---
@@ -321,18 +321,166 @@ label ch2_malam:
     jump chapter3
 
 # ============================================================
-# CHAPTER 3 — Rabu: Dua Versi Cerita (STUB)
-# Beat: 3.1 versi Mang Ujang (bohong, takut toko dibilang angker)
-#   3.2 versi Dimas (papan panti Lembang, satpam panti)
-#   Pilihan 4: percaya_ujang / percaya_dimas / keduanya
-#   3.3 CCTV 22.31 — bukti_cctv_2231 = True (jalur Dimas / mandiri)
-#   Akhir: teguran pertama Bu Ratna
+# CHAPTER 3 — Rabu: Dua Versi Cerita
+# Durasi target: ~12 menit
+# Beat: 3.1 Versi Mang Ujang
+#       3.2 Versi Dimas
+#       Pilihan 4 — titik cabang utama
+#       3.3 CCTV 22.31
+#       Akhir: teguran pertama Bu Ratna
 # ============================================================
 label chapter3:
+    scene bg hitam
+    "CHAPTER 3 — Rabu: Dua Versi Cerita"
+
+    # --- Scene 3.1 — Versi Mang Ujang ---
     scene bg interior_siang
-    "[Chapter 3 — STUB: naskah penuh belum ditulis. Beat: dua versi cerita, CCTV 22.31, teguran Bu Ratna.]"
-    $ bukti_cctv_2231 = True
-    jump chapter4
+    show alya curiga at center
+    "Rabu pagi. Alya datang lebih awal dari biasanya — bukan untuk shift, tapi untuk satu pertanyaan yang tidak bisa menunggu sampai sore."
+    "Kemarin dia sudah tahu dua hal: Bu Lastri itu istri Pak Wirya, dan Pak Wirya datang jam 21.14 bukan karena kebetulan."
+    "Hari ini dia harus tahu satu hal lagi: Pak Wirya itu... siapa, sebenarnya?"
+
+    show ujang serius at center
+    ujang "Neng Lya. Pagi-pagi sudah di sini."
+    alya "Mang, saya mau tanya. Soal Pak Wirya."
+    "Mang Ujang menatap sekeliling toko, memastikan tidak ada yang mendengar. Lalu dia mendekat, suaranya turun setengah."
+    ujang "Pak Wirya itu sudah tidak ada, Neng. Yang datang tiap malam itu... ya, yang datang itu. Jangan dipanggil namanya keras-keras."
+
+    show alya kaget at center
+    alya "Sudah tidak ada? Maksud Mang, Pak Wirya meninggal?"
+    ujang "Tahun sembilan delapan. Sama seperti istrinya. Warung ini digusur, mereka berdua... ya, sudah."
+    "Alya menatap Mang Ujang. Ada sesuatu yang tidak cocok."
+    "Saat bilang itu, Mang Ujang menghindari kontak mata. Tangannya meremas topi satpamnya. Suaranya datar, tapi terlalu datar — seperti orang yang menghafal kalimat, bukan orang yang mengingat."
+    alya "Mang, kalau Pak Wirya sudah tidak ada sejak 1998... siapa yang saya layani tiap malam jam 21.14?"
+    ujang "Itu yang saya bilang, Neng. Jangan dicari. Ada pesanan yang memang bukan buat orang hidup."
+
+    # --- Scene 3.2 — Versi Dimas ---
+    scene bg jalan_malam
+    show dimas serius at center
+    "Siang itu, Dimas menunggu di depan toko. Di tangannya ada ponsel, layarnya menampilkan sebuah foto."
+    dimas "Mbak, lihat ini. Aku foto dari luar pagar panti Lembang."
+    "Foto itu: papan pengumuman panti. Daftar penghuni. Di salah satu baris, ada nama yang dicoret."
+    dimas "Wirya Santoso. Ada di daftar penghuni 2015 sampai 2019. Lalu dicoret, ada catatan di sampingnya: pindah ke keluarga."
+    alya "Jadi dia pernah di panti Lembang?"
+    dimas "Pernah. Tapi sudah pindah. Aku tanya satpam pantinya siang tadi — Pak Wirya pindah ke rumah keponakan di Antapani, awal 2020."
+    dimas "Lihat, Mbak. Namanya ada di daftar panti, tapi sudah dicoret. Dia pindah. Bukan orang mati. Mang Ujang itu... dia cuma takut toko ini dibilang angker."
+
+    show alya curiga at center
+    alya "Terus arsip koran 1998-nya?"
+    dimas "Belum. Aku baru bisa ke perpustakaan daerah besok pagi, Kamis. Arsip koran itu tidak bisa didapat dalam satu sore, Mbak. Sabar."
+    "Alya tidak menunjukkan foto KTP — karena Dimas memang tidak punya. Yang dia punya hanya foto papan pengumuman dari luar pagar, dan cerita dari satpam panti."
+    "Itu bukti publik. Bukan bukti yang bisa didapat begitu saja, tapi juga bukan bukti yang bisa dipalsukan dengan mudah."
+    "Dan sekarang Alya punya dua versi cerita yang saling bertentangan."
+    "Versi Mang Ujang: Pak Wirya sudah mati sejak 1998."
+    "Versi Dimas: Pak Wirya hidup, pernah di panti Lembang, sekarang tinggal di Antapani."
+    "Keduanya tidak bisa benar bersamaan."
+
+    # --- Pilihan 4 — titik cabang utama ---
+    scene bg kos_alya
+    show alya lelah at center
+    "Malam itu, di kos, Alya duduk di depan buku catatannya."
+    "Dia harus memilih. Bukan karena dia suka memilih — tapi karena besok, Kamis, dia harus bertindak. Dan dia tidak bisa bertindak dengan dua versi cerita di kepala."
+
+    menu:
+        "Percaya Mang Ujang.":
+            $ percaya_ujang = True
+            $ percaya_dimas = False
+            $ kepercayaan += 1
+            "Alya memilih percaya pada orang yang paling lama di tanah ini."
+            "Mang Ujang tahu sejarah warung ini. Dia ada di sana tahun 1998. Kalau dia bilang Pak Wirya sudah tidak ada, mungkin memang begitu — dan yang datang tiap malam adalah sesuatu yang lain."
+            "Tapi di sudut hati Alya, ada yang mengganjal: kenapa Mang Ujang menghindari kontak mata saat bilang itu?"
+            jump ch3_cctv
+
+        "Percaya Dimas.":
+            $ percaya_dimas = True
+            $ percaya_ujang = False
+            $ kepercayaan += 1
+            "Alya memilih percaya pada bukti yang bisa dilihat."
+            "Nama Wirya Santoso ada di papan panti, dicoret dengan catatan pindah ke keluarga. Satpam panti mengatakannya sendiri. Itu lebih kuat daripada cerita yang disampaikan sambil menghindari kontak mata."
+            "Besok, Dimas mengajaknya ke rumah keponakan Pak Wirya di Antapani — bukan ke panti Lembang, karena Pak Wirya sekarang tinggal di Antapani."
+            jump ch3_cctv
+
+        "Percaya keduanya setengah-setengah, cari bukti sendiri.":
+            if bukti_buku_1998 and ketelitian >= 2:
+                $ percaya_ujang = True
+                $ percaya_dimas = True
+                $ ketelitian += 1
+                "Alya tidak mau memilih. Dia punya buku 1998 di tangannya — tulisan tangan Bu Lastri, pesanan yang selalu sama, dan nama Wirya Santoso di halaman pertama."
+                "Buku itu bilang: Bu Lastri itu nyata, pesanannya nyata, dan suaminya nyata."
+                "Foto papan panti bilang: Wirya Santoso itu nyata, pernah di panti, lalu pindah ke keluarga."
+                "Dua-duanya bisa benar, kalau dibaca dengan cara yang lain: Pak Wirya hidup, tapi dia datang untuk menuntaskan janji ke istrinya yang sudah meninggal."
+                "Ini jalur tersulit — Alya harus memegang dua versi sekaligus, tanpa menolak salah satunya. Tapi ini juga jalur yang paling lengkap untuk True Ending."
+                jump ch3_cctv
+            else:
+                "Alya mencoba memegang dua versi sekaligus — tapi dia sadar, buktinya belum cukup."
+                "Dia belum membaca buku 1998 dengan teliti, atau dia belum memperhatikan cukup detail untuk menyambungkan keduanya."
+                "Kalau dia memaksakan diri sekarang, dia hanya akan bingung sendiri. Dia harus memilih satu sisi dulu."
+                jump ch3_pilih_sisi
+
+label ch3_pilih_sisi:
+    menu:
+        "Percaya Mang Ujang.":
+            $ percaya_ujang = True
+            $ percaya_dimas = False
+            $ kepercayaan += 1
+            jump ch3_cctv
+
+        "Percaya Dimas.":
+            $ percaya_dimas = True
+            $ percaya_ujang = False
+            $ kepercayaan += 1
+            jump ch3_cctv
+
+label ch3_cctv:
+    # --- Scene 3.3 — CCTV 22.31 ---
+    scene bg gudang
+    show alya curiga at center
+    "Rabu siang. Bu Ratna sedang keluar toko."
+    "Mang Ujang membuka pintu ruang DVR dengan kuncinya sendiri — diam-diam."
+    show ujang ragu at center
+    ujang "Jangan bilang-bilang, Neng. Ini bisa jadi masalah buat saya juga. Saya cuma buka sebentar."
+    "Alya mengangguk. Dia tahu: kasir tidak boleh mengakses DVR sendiri. Akses hanya lewat kepala toko, atau lewat Mang Ujang yang memegang kunci ruang DVR."
+    "Rekaman pertama: CCTV toko SegarMart sendiri. Retensi 14–30 hari, bisa dicek mundur."
+    "Setelah 22.00, toko kosong. Tidak ada orang masuk lewat pintu depan. Tidak ada transaksi di kasir."
+    "Lampu boleh mati pukul 22.31 — tapi CCTV tidak mati. CCTV di sirkuit terpisah dengan UPS, merekam 24 jam dengan mode infrared. Yang gelap hanya lampunya."
+    "Jadi struk 02.14 itu makin mustahil: tidak ada transaksi di kasir setelah 22.00, tapi ada struk yang tercetak jam 02.14."
+
+    if percaya_dimas:
+        scene bg jalan_malam
+        show dimas serius at center
+        "Rekaman kedua: CCTV warung sebelah."
+        "Dimas meminta izin ke pemilik warung sebelah Rabu siang. Pemiliknya hanya mengizinkan melihat satu jam rekaman, pukul 22.00–23.00, di tempat, tidak boleh difoto sembarangan."
+        "Di rekaman itu, pukul 22.31 — setelah toko tutup — terlihat sosok Pak Wirya berjalan melewati toko, menuju petak tanah kosong di belakang toko, lalu menghilang dari frame."
+        "Dia tidak masuk toko. Dia ke tanah bekas warung di belakang."
+        $ bukti_cctv_2231 = True
+        $ ketelitian += 1
+        "Alya mencatat: gudang belakang adalah blind spot. Tidak ada kamera di dalam gudang, hanya 1 kamera lorong yang rusak sejak 2019 dan belum diganti. Di situlah mesin kasir lama berada."
+    else:
+        "Alya hanya sempat melihat rekaman toko sendiri. Rekaman warung sebelah belum sempat dia lihat — pemiliknya hanya mengizinkan kalau ada yang meminta dengan sopan, dan Alya belum sempat ke sana."
+        "Tapi satu hal sudah jelas: tidak ada orang masuk toko setelah 22.00. Kalau ada yang berjalan pukul 22.31, dia berjalan di luar toko — bukan di dalam."
+
+    # --- Akhir Chapter 3 — Teguran pertama Bu Ratna ---
+    scene bg interior_siang
+    show ratna tegas at center
+    "Sore itu, Bu Ratna memanggil Alya ke ruang kepala toko."
+    ratna "Saya dengar kamu utak-atik gudang. Saya tegur sekali ini. Sekali lagi, saya laporkan ke area manager."
+    "Ini teguran pertama, bukan ancaman pindah langsung. Tapi tekanan naik."
+    "Alya harus menjawab — sekarang, di depan Bu Ratna."
+
+    menu:
+        "Jujur: saya sedang mencari tahu soal struk dan lilin yang hilang.":
+            $ lapor_bu_ratna = True
+            $ ketelitian += 1
+            ratna "Hmm. Saya catat. Tapi jangan utak-atik gudang tanpa izin lagi. Kalau ada apa-apa, lapor saya dulu."
+            "Bu Ratna tidak senang — tapi dia mencatat. Dan laporan itu melindungi Alya: kalau dia pernah melapor, Ending D tidak bisa terjadi padanya."
+            jump chapter4
+
+        "Bohong: saya cuma merapikan stok, Bu.":
+            $ hide_count += 1
+            $ keberanian += 1
+            "Alya berbohong. Bu Ratna menatapnya lama, lalu mengangguk pelan — tidak percaya sepenuhnya, tapi tidak mengejar."
+            "Alya menyembunyikan penyelidikannya. Sekali lagi. Dan dia tahu, kalau ini terjadi sekali lagi, dia tidak akan punya pelindung."
+            jump chapter4
 
 # ============================================================
 # CHAPTER 4 — Kamis: Pesanan Terakhir (STUB)

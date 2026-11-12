@@ -87,7 +87,8 @@ Selama aset belum ada, game memakai placeholder warna solid yang didefinisikan d
 - [x] Scaffold Ren'Py 8.5.3
 - [x] Prolog + Chapter 1 playable (dengan dialog inti dari outline)
 - [x] Chapter 2 playable (gudang 15.30 + buku 1998, pilihan 21.14, warung kopi 22.30)
-- [ ] Chapter 3–5 — naskah penuh (saat ini label stub + beat utama)
+- [x] Chapter 3 playable (dua versi cerita, pilihan kepercayaan, CCTV 22.31, teguran Bu Ratna)
+- [ ] Chapter 4–5 — naskah penuh (saat ini label stub + beat utama)
 - [ ] Aset background / sprite / CG dari Google Flow
 - [ ] Audio / musik
 - [ ] Playtest HP + build Android
